@@ -1,0 +1,30 @@
+{
+  "name": "backbone-boilerplate",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mistakevin/backbone-boilerplate",
+  "authors": [
+    "Kevin Colten <kevincolten@gmail.com>"
+  ],
+  "description": "Backbone Browserfied",
+  "main": "router.js",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "backbone.relational": "~0.9.0",
+    "backbone.epoxy": "~1.3.1"
+  },
+  "resolutions": {
+    "backbone": "~1.2.1"
+  }
+}
