@@ -1,8 +1,9 @@
+'use strict';
+
 var Backbone = require('backbone');
 var UsersController = require('./controllers/UsersController');
-Backbone.$ = $;
 
-module.exports = Backbone.Router.extend({
+var Application = Backbone.Router.extend({
   controllers: {},
 
   initialize: function() {
@@ -10,3 +11,5 @@ module.exports = Backbone.Router.extend({
     Backbone.history.start();
   }
 });
+
+window.app = new Application();

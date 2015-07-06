@@ -12,7 +12,7 @@ var reactify = require('reactify')
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./index.js'],
+  entries: ['./app.js'],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
