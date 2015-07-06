@@ -1,26 +1,12 @@
-var $ = require('jquery');
-var _ = require('underscore');
 var Backbone = require('backbone');
-require('backbone.layoutmanager');
-require('./config.js');
-Backbone.HomeView = require('./views/HomeView.js');
+var BackboneRouteControl = require('backbone-route-control');
 
-module.exports = Backbone.Router.extend({
-    routes: {
-        '': 'homeController',
-        '/': 'homeController'
-    },
-
-    homeController: function()
-    {
-        var main = new Backbone.Layout({
-            template: _.template('<section id="content"></section>'),
-
-            views: {
-                "#content": new Backbone.HomeView()
-            }
-        });
-        $('body').html(main.$el);
-        main.render();
-    }
+var Router = BackboneRouteControl.extend({
+  routes: {
+    '':          'users#index',
+    'users':     'users#index',
+    'users/:id': 'users#show'
+  }
 });
+
+module.exports = Router;
