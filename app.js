@@ -1,36 +1,12 @@
 var Backbone = require('backbone');
-var Router = require('./router');
-var MainView = require('./screens/main/index');
-
-var UsersController = require('./controllers/user-controller');
-
+var UsersController = require('./controllers/UsersController');
 Backbone.$ = $;
 
-var Application = function() {
-  this.initialize();
-};
+module.exports = Backbone.Router.extend({
+  controllers: {},
 
-Application.prototype.initialize = function() {
-  this.controllers = {
-    users: new UsersController({ app: this })
-  };
-
-  this.router = new Router({
-    app: this,
-    controllers: this.controllers
-  });
-
-  this.mainView = new MainView({
-    el: $('#app'),
-    router: this.router
-  });
-
-  this.showApp();
-};
-
-Application.prototype.showApp = function() {
-  this.mainView.render();
-  Backbone.history.start({ pushState: true });
-};
-
-module.exports = Application;
+  initialize: function() {
+    this.controllers.users = new UsersController({router: this});
+    Backbone.history.start();
+  }
+});

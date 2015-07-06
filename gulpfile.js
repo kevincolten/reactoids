@@ -19,7 +19,7 @@ var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
 
 // add transformations here
-// i.e. b.transform(coffeeify);
+b.transform('reactify');
 
 gulp.task('js', bundle); // so you can run `gulp js` to build the file
 b.on('update', bundle); // on any dep update, runs the bundler
@@ -35,7 +35,6 @@ function bundle() {
     // optional, remove if you dont want sourcemaps
     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
       // Add transformation tasks to the pipeline here.
-      .transform
     .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./build'));
 }
