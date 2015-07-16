@@ -8,8 +8,9 @@ module.exports = Backbone.Model.extend({
   parse: function(model)
   {
     model.description = model.description.replace("@post ", "");
-    if (model.files) {
-      model.content = marked(model.files[Object.keys(model.files)[0]].content, { sanitize: true });
+    var content = model.files[Object.keys(model.files)[0]].content
+    if (content) {
+      model.content = marked(content, { sanitize: true });
     }
     return model;
   }
