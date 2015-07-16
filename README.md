@@ -1,1 +1,1 @@
-# backbone-boilerplate
+# backbone-react-boilerplate
