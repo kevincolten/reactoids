@@ -1,22 +1,26 @@
 'use strict';
 
 var AsteroidModel = require('./models/AsteroidModel');
-var AsteroidsComponent = require('./components/AsteroidsComponent');
+var AsteroidComponent = require('./components/AsteroidComponent');
 var Backbone = require('backbone');
 var React = require('react');
 var _ = require('underscore');
+var $ = require('jquery');
 
 var Application = Backbone.Router.extend({
   initialize: function()
   {
     var asteroids = new Backbone.Collection();
 
-    _(5).times(function () {
-      asteroids.add(new AsteroidModel());
+    _(50).times(function (idx) {
+      asteroids.add(new AsteroidModel({ id: idx }));
     });
 
-    var AsteroidsView = React.createFactory(AsteroidsComponent);
-    React.render(AsteroidsView({ collection: asteroids }), document.getElementById('content'));
+    asteroids.each(function (asteroid) {
+      var AsteroidView = React.createFactory(AsteroidComponent);
+      $('body').prepend('<div id="asteroid' + asteroid.id + '">');
+      React.render(AsteroidView({ model: asteroid }), $('#asteroid' + asteroid.id)[0]);
+    });
 
     setInterval (function () {
       asteroids.each(function (asteroid) {
@@ -28,7 +32,7 @@ var Application = Backbone.Router.extend({
           asteroid.fixOffScreen();
         }
       });
-    }, 10 );
+    }, 10);
 
   }
 });
