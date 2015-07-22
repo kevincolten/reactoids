@@ -8,7 +8,7 @@ var Backbone = require('backbone');
 var React = require('react');
 var _ = require('underscore');
 var $ = require('jquery');
-var keypress = require('keypress.js');
+var key = require('keymaster');
 
 var Application = Backbone.Router.extend({
   initialize: function()
@@ -30,21 +30,27 @@ var Application = Backbone.Router.extend({
     $('body').prepend('<div id="ship">');
     React.render(ShipView({ model: ship }), $('#ship')[0]);
 
-    var listener = new keypress.keypress.Listener();
-
-    listener.simple_combo('up', function() {
-      ship.power();
-    });
-
-    listener.simple_combo('left', function() {
-      ship.set('angle', ship.get('angle') - 45);
-    });
-
-    listener.simple_combo('right', function() {
-      ship.set('angle', ship.get('angle') + 45);
-    });
+    var angleSpeed = 0.03;
 
     setInterval (function () {
+      key("up", function () {
+        ship.accelerate();
+      });
+
+      key("right", function () {
+        ship.set('angle', ship.get('angle') + angleSpeed);
+      });
+
+      key("left", function () {
+        ship.set('angle', ship.get('angle') - angleSpeed);
+      });
+
+      ship.coast();
+
+      if (ship.offScreen()) {
+        ship.fixOffScreen();
+      }
+
       asteroids.each(function (asteroid) {
         asteroid.set({
           pos_x: asteroid.get('pos_x') + asteroid.get('vel_x'),

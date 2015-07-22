@@ -4,7 +4,7 @@
   "dependencies": {
     "backbone": "^1.2.1",
     "jquery": "^2.1.4",
-    "keypress.js": "^2.1.0-1",
+    "keymaster": "^1.6.2",
     "react": "^0.13.3",
     "react.backbone": "^0.6.0",
     "underscore": "^1.8.3"

@@ -11,31 +11,17 @@ module.exports = MovingObjectModel.extend({
         vel_y: 0
     },
 
-    initialize: function()
-    {
-        this.on({
-            'change:vel_y': this.turnY,
-            'change:vel_x': this.turnX
-        });
-    },
-
-    power: function()
+    accelerate: function()
     {
         this.set({
-            vel_x: this.get('vel_x') + Math.sin(this.get('angle')),
-            vel_y: this.get('vel_y') + (-1 * Math.cos(this.get('angle')))
+            vel_x: this.get('vel_x') + (Math.sin((Math.PI / 180) * this.get('angle')) * 0.001),
+            vel_y: this.get('vel_y') + ((-1 * Math.cos((Math.PI / 180) * this.get('angle'))) * 0.001)
         });
-
-        console.log('vel_x: ' + this.get('vel_x') + ' vel_y: ' + this.get('vel_y') + ' angle: ' + this.get('angle'));
     },
 
-    turnY: function()
+    coast: function()
     {
         this.set('pos_y', this.get('pos_y') + this.get('vel_y'));
-    },
-
-    turnX: function()
-    {
         this.set('pos_x', this.get('pos_x') + this.get('vel_x'));
     }
 });
