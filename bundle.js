@@ -146,14 +146,6 @@ var Backbone = require('backbone')
 
 module.exports = Backbone.Model.extend({
 
-  updatePosition: function(velocity)
-  {
-    this.set({
-      'pos_x': this.get('pos_x') + velocity['pos_x'],
-      'vel_y': this.get('vel_y') + velocity['vel_y']
-    });
-  },
-
   offScreen: function()
   {
     if (this.get('pos_x') > window.innerWidth || this.get('pos_x') < 0) {
@@ -203,8 +195,10 @@ module.exports = MovingObjectModel.extend({
 
     coast: function()
     {
-        this.set('pos_y', this.get('pos_y') + this.get('vel_y'));
-        this.set('pos_x', this.get('pos_x') + this.get('vel_x'));
+        this.set({
+            pos_x: this.get('pos_x') + this.get('vel_x'),
+            pos_y: this.get('pos_y') + this.get('vel_y')
+        });
     }
 });
 

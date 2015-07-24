@@ -21,7 +21,9 @@ module.exports = MovingObjectModel.extend({
 
     coast: function()
     {
-        this.set('pos_y', this.get('pos_y') + this.get('vel_y'));
-        this.set('pos_x', this.get('pos_x') + this.get('vel_x'));
+        this.set({
+            pos_x: this.get('pos_x') + this.get('vel_x'),
+            pos_y: this.get('pos_y') + this.get('vel_y')
+        });
     }
 });

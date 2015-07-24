@@ -2,14 +2,6 @@ var Backbone = require('backbone')
 
 module.exports = Backbone.Model.extend({
 
-  updatePosition: function(velocity)
-  {
-    this.set({
-      'pos_x': this.get('pos_x') + velocity['pos_x'],
-      'vel_y': this.get('vel_y') + velocity['vel_y']
-    });
-  },
-
   offScreen: function()
   {
     if (this.get('pos_x') > window.innerWidth || this.get('pos_x') < 0) {
