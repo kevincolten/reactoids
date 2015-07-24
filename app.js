@@ -20,15 +20,13 @@ var Application = Backbone.Router.extend({
     });
 
     asteroids.each(function (asteroid) {
-      var AsteroidView = React.createFactory(AsteroidComponent);
       $('body').prepend('<div id="asteroid' + asteroid.id + '">');
-      React.render(AsteroidView({ model: asteroid }), $('#asteroid' + asteroid.id)[0]);
+      React.render(<AsteroidComponent model={asteroid} />, $('#asteroid' + asteroid.id)[0]);
     });
 
     var ship = new ShipModel();
-    var ShipView = React.createFactory(ShipComponent);
     $('body').prepend('<div id="ship">');
-    React.render(ShipView({ model: ship }), $('#ship')[0]);
+    React.render(<ShipComponent model={ship} />, $('#ship')[0]);
 
     var angleSpeed = 0.03;
 
